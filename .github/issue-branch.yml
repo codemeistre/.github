@@ -1,0 +1,44 @@
+##
+## Organization-wide configuration for Create Issue Branch application 
+## See https://github.com/marketplace/create-issue-branch
+##
+
+# A new "issue branch" is created after commenting on an
+# issue with `/create-issue-branch` or `/cib`
+mode: chatops
+
+# The app will not comment on the issue after creating a branch
+silent: true
+# If the silent is not enabled, the app will comment using this template
+commentMessage: 'Branch `${branchName}` created for this issue: **`${issue.title}`**'
+
+# The branch name generate by the app will follow this message template
+branchName: 'issue-${issue.number}'
+
+# Characters that are not allowed in Git branch names are
+# replaced by default with this string
+gitSafeReplacementChar: '-'
+
+# The app will close the issue automatically when a pull request
+# for an issue branch is merged. Note that the app should be able
+# to find the issue number in the branch name
+autoCloseIssue: true
+
+# Define the branch name prefix based on issue label
+branches:
+  - label: '[type] bug'
+    prefix: 'bugfix/'
+    skip: false
+  - label: '[type] feature'
+    prefix: 'develop/feat-'
+    skip: false
+  - label: '[type] enhancement'
+    prefix: 'develop/'
+    skip: false
+  # Do not run the app to all other issues
+  - label: '*'
+    skip: true
+
+# Do not automatically open a (draft) Pull Request for the newly created branch
+openDraftPR: false
+openPR: false
