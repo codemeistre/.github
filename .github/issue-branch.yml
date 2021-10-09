@@ -35,6 +35,9 @@ branches:
   - label: '[type] enhancement'
     prefix: 'develop/'
     skip: false
+  - label: '[type] security issue'
+    prefix: 'hotfix/security-'
+    skip: false
   # Do not run the app to all other issues
   - label: '*'
     skip: true
