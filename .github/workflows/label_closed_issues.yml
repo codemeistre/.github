@@ -1,0 +1,38 @@
+##
+## Label Closed Issues
+##
+## This workflow aims to add missing labels to closed issues, only if the issue
+## does not have the following labels:
+## - abandoned
+## - accepted
+## - blocked
+## as the above are the "final state" of issue's lifecycle.
+##
+
+name: Label closed issues
+
+on:
+  ## Mark this as a reusable GitHub workflow
+  ## https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+  workflow_call:
+
+  # issues:
+  #   types: [closed]
+
+jobs:
+  label-issue:
+    name: Assigns labels
+    timeout-minutes: 3
+    if: >-
+      !contains(github.event.issue.labels.*.name , 'abandoned') &&
+      !contains(github.event.issue.labels.*.name , 'accepted') &&
+      !contains(github.event.issue.labels.*.name , 'blocked')
+    runs-on: ubuntu-latest
+    steps:
+      - name: |
+          Add "accepted" status label to issue #${{ github.event.issue.number }}' and drop invalid 'status' ones
+        uses: andymckay/labeler@master
+        with:
+          add-labels: '[status] accepted'
+          ## 'status' labels taken from https://github.com/codemeistre/backend/labels
+          remove-labels: '[status] changes needed , [status] help wanted , [status] in progress , [status] on hold , [status] review needed'

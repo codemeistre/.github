@@ -1,0 +1,33 @@
+##
+## Take Issue
+##
+## This workflow aims to write a '/create-issue-branch' comment every time an
+## open issue is labeled with '[status] in progress' label.
+##
+
+name: Create branch to work on a WIP issue
+
+on:
+  ## Mark this as a reusable GitHub workflow
+  ## https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+  workflow_call:
+
+  # issues:
+  #   types: [labeled]
+
+jobs:
+  add-comment:
+    name: "Write 'create issue branch' comment"
+    timeout-minutes: 3
+    if: ${{ github.event.label.name == '[status] in progress' && github.event.issue.state == 'open' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: 'Add comment on #${{ github.event.issue.number }}'
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          ## https://github.com/marketplace/actions/create-issue-branch
+          body: |
+            /create-issue-branch

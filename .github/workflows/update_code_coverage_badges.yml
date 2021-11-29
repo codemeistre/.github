@@ -1,0 +1,84 @@
+##
+## Update Code Coverage Badges
+##
+## This workflow aims to run the automated tests with code coverage to generate
+## report badges to the `README.md` file and then apply any change on it with
+## git commit -m 'docs(readme): update code coverage badges report'
+##
+
+name: Update code coverage badges
+
+on:
+  ## Mark this as a reusable GitHub workflow
+  ## https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+  workflow_call:
+    inputs:
+      artifact-name:
+        required: true
+        type: string
+
+  # pull_request:
+  #   branches:
+  #     - master
+  #   types: [closed]
+  #   paths:
+  #     - '**.spec.ts'
+  #     - '**.ts'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+
+jobs:
+  generate:
+    name: Unit tests with code coverage report
+    timeout-minutes: 10
+    if: >-
+      github.event_name == 'pull_request' && (
+      !contains(github.event.pull_request.title, '[WIP]') &&
+      !contains(github.event.pull_request.labels.*.name, '[type] dependencies') &&
+      github.event.pull_request.merged == true
+      ) || true
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0 # disable Husky git hooks
+    steps:
+      ##########################################################################
+      ######################### Prepare the environment ########################
+      ##########################################################################
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.5
+      - name: Use node16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - uses: bahmutov/npm-install@v1
+      ##########################################################################
+      - name: Run unit tests generating coverage report
+        run: yarn test:cov:ci
+      - name: Add coverage report badges to README.md
+        run: yarn coverage:update-badges
+      - name: Formatting README.md
+        run: yarn prettier --write README.md
+      - name: Show changes
+        run: git diff --exit-code
+        continue-on-error: true
+      - name: Add and commit changes on README.md
+        if: ${{ failure() }}
+        uses: EndBug/add-and-commit@v7
+        with:
+          branch: 'master'
+          add: 'README.md'
+          message: 'docs(readme): update code coverage badges report'
+          pull: 'NO-PULL'
+          push: true
+          committer_name: GitHub Actions
+          default_author: github_actions
+      - name: Upload "coverage" directory
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: ./coverage
+          if-no-files-found: error
