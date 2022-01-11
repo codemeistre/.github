@@ -1,6 +1,18 @@
+##
+## Close Issue or Pull Request from External Users
+##
+## This workflow aims to auto-close open GitHub issues or pull requests created by
+## users that are not members of the organization. A GH bot will close and write
+## comment to let the user aware of this.
+##
+
 name: Close issues or pull request from external users
 
 on:
+  ## Mark this as a reusable GitHub workflow
+  ## https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+  workflow_call:
+
   issues:
     types: [opened]
   pull_request:
