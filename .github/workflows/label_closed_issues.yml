@@ -7,6 +7,7 @@
 ## - accepted
 ## - blocked
 ## as the above are the "final state" of issue's lifecycle.
+## This ignores issues made by GitHub bots.
 ##
 
 name: Label closed issues
@@ -24,6 +25,7 @@ jobs:
     name: Assigns labels
     timeout-minutes: 3
     if: >-
+      github.event.issue.user.type != 'Bot' &&
       !contains(github.event.issue.labels.*.name , 'abandoned') &&
       !contains(github.event.issue.labels.*.name , 'accepted') &&
       !contains(github.event.issue.labels.*.name , 'blocked')
