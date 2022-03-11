@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "descrpition": "Preset for use with CodeMeistre's repositories",
+  "enabled": true,
+  "extends": ["config:js-app"],
+  "timezone": "America/Manaus",
+  "schedule": ["every month"],
+  "labels": ["[type] dependencies", "🔕 do not notify"],
+  "enabledManagers": ["npm", "github-actions"],
+  "dependencyDashboardTitle": "Dependency Dashboard",
+  "dependencyDashboardLabels": [],
+  "prHourlyLimit": 5,
+  "prConcurrentLimit": 10,
+  "reviewers": [],
+  "ignoreTests": false,
+  "vulnerabilityAlerts": {
+    "enabled": false
+  },
+  "semanticCommits": "enabled",
+  "packageRules": [
+    {
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "non-major deps",
+      "prPriority": 2
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "github"
+    }
+  ]
+}
