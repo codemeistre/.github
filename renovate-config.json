@@ -19,10 +19,6 @@
   "semanticCommits": "enabled",
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "devDependencies"],
-      "semanticCommitType": "chore",
-    },
-    {
       "matchDepTypes": ["dependencies"],
       "semanticCommitScope": "deps"
     },
@@ -32,6 +28,7 @@
     },
     {
       "matchDepTypes": ["dependencies", "devDependencies"],
+      "semanticCommitType": "chore",
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "non-major deps",
       "prPriority": 2
