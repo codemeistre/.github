@@ -17,8 +17,11 @@
     "enabled": false
   },
   "semanticCommits": "enabled",
-  "semanticCommitType": "chore",
   "packageRules": [
+    {
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "semanticCommitType": "chore",
+    },
     {
       "matchDepTypes": ["dependencies"],
       "semanticCommitScope": "deps"
