@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "descrpition": "Preset for use with CodeMeistre's repositories",
   "enabled": true,
-  "extends": ["config:js-app", "group:monorepos", "group:allNonMajor", "group:jsTest"],
+  "extends": ["config:js-app", "group:monorepos", "group:allNonMajor"],
   "timezone": "America/Manaus",
   "schedule": ["every month"],
   "labels": ["[type] dependencies", "🔕 do not notify"],
