@@ -19,24 +19,12 @@
   "semanticCommits": "enabled",
   "packageRules": [
     {
-      "extends": "packages:jsTest",
-      "groupName": "js-test-packages"
-    },
-    {
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    },
-    {
-      "matchDepTypes": ["dependencies"],
-      "semanticCommitScope": "deps",
+      "matchDepTypes": ["dependencies", "devDependencies"],
       "semanticCommitType": "chore",
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "semanticCommitScope": "deps-dev",
-      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "non-major deps",
+      "prPriority": 2
     },
     {
       "matchManagers": ["github-actions"],
