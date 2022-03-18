@@ -20,6 +20,12 @@
   "packageRules": [
     {
       "matchDepTypes": ["dependencies", "devDependencies"],
+      "excludePackagePatterns": ["^typeorm"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchPackagePatterns": ["^typeorm$", "/typeorm"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
     },
