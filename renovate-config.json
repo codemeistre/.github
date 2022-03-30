@@ -21,12 +21,18 @@
     {
       "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["minor", "patch"],
+      "excludePackagePatterns": ["^typeorm"],
       "groupName": "all non-major dependencies",
       "allowedVersions": ">=1",
       "groupSlug": "all-minor-patch-no-breaking-changes"
     },
     {
       "matchDepTypes": ["dependencies", "devDependencies"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchPackagePatterns": ["^typeorm$", "/typeorm"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
     },
