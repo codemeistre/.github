@@ -37,6 +37,12 @@
       "semanticCommitScope": "deps"
     },
     {
+      "groupName": "automapper", 
+      "matchPackagePrefixes": ["@automapper/"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
       "groupName": "github-actions",
       "matchManagers": ["github-actions"],
       "semanticCommitType": "chore",
