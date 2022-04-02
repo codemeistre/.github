@@ -48,13 +48,13 @@ jobs:
       ######################### Prepare the environment ########################
       ##########################################################################
       - name: Checkout repo
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v3
       - name: Use node16
         uses: actions/setup-node@v2
         with:
           node-version: '16'
           cache: 'yarn'
-      - uses: bahmutov/npm-install@v1
+      - run: yarn --frozen-lockfile
       ##########################################################################
       - name: Run unit tests generating coverage report
         run: yarn test:cov:ci
@@ -63,13 +63,13 @@ jobs:
       - name: Formatting README.md
         run: yarn prettier --write README.md
       - name: Show changes
-        run: git diff --exit-code
+        id: gitdiff
         continue-on-error: true
+        run: git diff --exit-code
       - name: Add and commit changes on README.md
-        if: ${{ failure() }}
+        if: steps.gitdiff.outcome == 'failure'
         uses: EndBug/add-and-commit@v7
         with:
-          branch: 'master'
           add: 'README.md'
           message: 'docs(readme): update code coverage badges report'
           pull: 'NO-PULL'
