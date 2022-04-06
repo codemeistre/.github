@@ -1,0 +1,56 @@
+##
+## Audit
+##
+## This workdlow aims to detect changes comming with vulnerabilities on project's
+## dependencies.
+## This was intended to run for pull requests that touches `package.json` or
+## lockfile.
+##
+
+name: Audit project dependencies
+
+on:
+  ## Mark this as a reusable GitHub workflow
+  ## https://docs.github.com/en/actions/learn-github-actions/reusing-workflows#creating-a-reusable-workflow
+  workflow_call:
+
+  ## Allow trigger this workflow manually using the GitHub CLI $ gh workflow run
+  # workflow_dispatch:
+  # pull_request:
+  #   branches:
+  #     - master
+  #   types: [edited, opened, synchronize, reopened]
+  #   paths:
+  #     - 'package.json'
+  #     - 'yarn.lock'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+
+jobs:
+  audit:
+    name: Vulnerability audit installed packages
+    timeout-minutes: 10
+    if: >-
+      !contains(github.event.pull_request.title, '[WIP]') &&
+      !contains(github.event.pull_request.labels.*.name, '[type] dependencies') &&
+      github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0 # disable Husky git hooks
+    steps:
+      ##########################################################################
+      ######################### Prepare the environment ########################
+      ##########################################################################
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Use node16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      ##########################################################################
+      - name: Yarn audit critical
+        run: yarn audit --level critical # https://classic.yarnpkg.com/en/docs/cli/audit
