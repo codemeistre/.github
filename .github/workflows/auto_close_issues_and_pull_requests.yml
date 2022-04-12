@@ -45,7 +45,7 @@ jobs:
       ## See https://docs.github.com/en/rest/reference/pulls
       - if: ${{ github.event.pull_request.author_association == 'NONE' && github.event.pull_request.user.type != 'Bot' }}
         name: Close Pull Request
-        uses: peter-evans/close-pull@v1
+        uses: peter-evans/close-pull@v2
         with:
           delete-branch: false
           comment: |
