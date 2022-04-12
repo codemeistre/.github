@@ -1,0 +1,50 @@
+##
+## Configuration file for Dependabot version updates on security warnings
+## https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+##
+
+version: 2
+updates:
+  ## Monit GitHub's workflows
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      ## Allow both direct and indirect updates for all packages.
+      - dependency-type: 'all'
+    ## Labels for all pull requests that will be created by the bot.
+    labels:
+      - '[type] dependencies'
+      - '🔕 do not notify'
+    ## Allow up to 2 open pull requests.
+    open-pull-requests-limit: 2
+    pull-request-branch-name:
+      ## eg: `dependabot/npm_and_yarn/next_js-acorn-6.4.1`
+      separator: '/'
+    ## Rebases open PRs when changes are detected.
+    rebase-strategy: 'auto'
+
+  ## Monit app dependencies
+  - package-ecosystem: 'npm' ## Since we have a `yarn.lock` file.
+    ## The package manifest file is stored in repository root.
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    allow:
+      ## Only dependencies under `dependencies` list
+      - dependency-type: 'production'
+    ## Labels for all pull requests that will be created by the bot.
+    labels:
+      - '[type] dependencies'
+      - '🔕 do not notify'
+    ## Allow up to 2 open pull requests.
+    open-pull-requests-limit: 5
+    pull-request-branch-name:
+      ## eg: `dependabot/npm_and_yarn/next_js-acorn-6.4.1`
+      separator: '/'
+    ## Rebases open PRs when changes are detected.
+    rebase-strategy: 'auto'
+    ## Only allow updates to the lockfile. Ignoring any new versions that would
+    ## required package manifest changes.
+    versioning-strategy: lockfile-only
