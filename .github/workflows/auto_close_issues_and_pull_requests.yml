@@ -28,7 +28,7 @@ jobs:
       ## See https://docs.github.com/en/rest/reference/issues
       - if: ${{ github.event.issue.author_association == 'NONE' && github.event.user.type != 'Bot' }}
         name: Close Issue
-        uses: peter-evans/close-issue@v1
+        uses: peter-evans/close-issue@v2
         with:
           comment: |
             💂 Sorry but we are not accepting issues from non-members :(
