@@ -37,8 +37,14 @@
       "semanticCommitScope": "deps"
     },
     {
-      "groupName": "automapper", 
+      "groupName": "AutoMapper", 
       "matchPackagePrefixes": ["@automapper/"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "groupName": "Pino", 
+      "matchPackagePatterns": ["^pino$", "^pino-", "-pino-", "/pino$", "/pino-"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
     },
