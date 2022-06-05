@@ -61,6 +61,30 @@
       "matchManagers": ["github-actions"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "github"
+    },
+    {
+      "groupName": "react",
+      "matchPackageNames": ["react", "@types/react", "react-dom", "@types/react-dom"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "groupName": "mui-emotion-styles",
+      "matchPackagePrefixes": ["@mui", "@emotion"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "groupName": "toast-ui",
+      "matchPackagePrefixes": ["@toast-ui"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "groupName": "eslint",
+      "matchPackagePrefixes": ["eslint"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
     }
   ]
 }
