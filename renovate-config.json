@@ -32,6 +32,14 @@
       "semanticCommitScope": "deps"
     },
     {
+      "groupName": "NestJS", 
+      "matchPackagePatterns": ["^@nestjs/.+"],
+      "excludePackageNames": ["@nestjs/config", "@nestjs/swagger"],
+      "semanticCommitType": "chore",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "groupName": "TypeORM", 
       "matchPackagePatterns": ["^typeorm$", "/typeorm"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
