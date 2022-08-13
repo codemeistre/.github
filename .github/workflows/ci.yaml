@@ -1,0 +1,20 @@
+name: teste
+
+on:
+  ## Allow triggering this workflow manually via GitHub CLI/web
+  workflow_dispatch:
+
+  pull_request:
+    branches:
+      - main
+      - dev
+    types: [opened, reopened, synchronize]
+
+jobs:
+  health_state:
+    name: 'Building & linting checks'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: test
+        run: echo 123
