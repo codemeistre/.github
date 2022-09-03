@@ -52,7 +52,7 @@
     },
     {
       "groupName": "Pino", 
-      "matchPackagePatterns": ["^pino$", "^pino-", "-pino-", "/pino$", "/pino-"],
+      "matchPackagePatterns": ["^pino$", "^pino-", "-pino$", "-pino-", "/pino$", "/pino-"],
       "semanticCommitType": "chore",
       "semanticCommitScope": "deps"
     },
