@@ -39,12 +39,6 @@
       "semanticCommitScope": "deps"
     },
     {
-      "groupName": "TypeORM", 
-      "matchPackagePatterns": ["^typeorm$", "/typeorm"],
-      "semanticCommitType": "chore",
-      "semanticCommitScope": "deps"
-    },
-    {
       "groupName": "AutoMapper", 
       "matchPackagePrefixes": ["@automapper/"],
       "semanticCommitType": "chore",
