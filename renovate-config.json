@@ -13,7 +13,6 @@
   "prConcurrentLimit": 10,
   "reviewers": [],
   "ignoreTests": false,
-  "ignoreDeps": ["typescript"],
   "vulnerabilityAlerts": {
     "enabled": false
   },
