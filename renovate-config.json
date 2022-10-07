@@ -10,7 +10,7 @@
   "dependencyDashboardTitle": "Dependency Dashboard",
   "dependencyDashboardLabels": [],
   "prHourlyLimit": 5,
-  "prConcurrentLimit": 10,
+  "prConcurrentLimit": 5,
   "reviewers": [],
   "ignoreTests": false,
   "vulnerabilityAlerts": {
