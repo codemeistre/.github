@@ -66,7 +66,13 @@ jobs:
         if: steps.cache-yarn-cache.outputs.cache-hit != 'true' || steps.cache-node-modules.outputs.cache-hit != 'true'
       ##########################################################################
       - name: Run unit tests generating coverage report
-        run: yarn test:cov:ci
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        id: coverage
+        with:
+          test-script: 'yarn test:cov:ci'
+          output: 'report-markdown'
+      - name: Generate job summary with coverage report results
+        run: echo ${{ steps.coverage.outputs.report }} >> $GITHUB_STEP_SUMMARY
 
       - name: Add coverage report badges to README.md
         run: yarn coverage:update-badges
